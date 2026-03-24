@@ -1,39 +1,33 @@
-import { normalizeURL, getURLsFromHTML } from './crawl.js'
-import { test, expect } from '@jest/globals'
+import { normalizeURL, getURLsFromHTML } from './crawl.js';
+import { test, expect } from '@jest/globals';
 
 test('normalizeURL strip protocal', () => {
-  const input = 'https://blog.boot.dev/path'
-  const actual = normalizeURL(input)
-  const expected = 'blog.boot.dev/path'
-  expect(actual).toEqual(expected)
-
-})
-
+  const input = 'https://blog.boot.dev/path';
+  const actual = normalizeURL(input);
+  const expected = 'blog.boot.dev/path';
+  expect(actual).toEqual(expected);
+});
 
 test('normalizeURL strip trailing slash', () => {
-  const input = 'https://blog.boot.dev/path/'
-  const actual = normalizeURL(input)
-  const expected = 'blog.boot.dev/path'
-  expect(actual).toEqual(expected)
-
-})
-
+  const input = 'https://blog.boot.dev/path/';
+  const actual = normalizeURL(input);
+  const expected = 'blog.boot.dev/path';
+  expect(actual).toEqual(expected);
+});
 
 test('normalizeURL capitals', () => {
-  const input = 'https://BLOG.boot.dev/path'
-  const actual = normalizeURL(input)
-  const expected = 'blog.boot.dev/path'
-  expect(actual).toEqual(expected)
-
-})
+  const input = 'https://BLOG.boot.dev/path';
+  const actual = normalizeURL(input);
+  const expected = 'blog.boot.dev/path';
+  expect(actual).toEqual(expected);
+});
 
 test('normalizeURL strip http', () => {
-  const input = 'http://blog.boot.dev/path'
-  const actual = normalizeURL(input)
-  const expected = 'blog.boot.dev/path'
-  expect(actual).toEqual(expected)
-
-})
+  const input = 'http://blog.boot.dev/path';
+  const actual = normalizeURL(input);
+  const expected = 'blog.boot.dev/path';
+  expect(actual).toEqual(expected);
+});
 
 test('getURLsFromHTML absolute', () => {
   const inputHTMLBody = `
@@ -42,17 +36,15 @@ test('getURLsFromHTML absolute', () => {
           <a href="https://blog.boot.dev"> Boot.dev Blog </a> 
         </body>
       </html>
-      `
-  const inputBaseURL = "https://blog.boot.dev"
-  const actual = getURLsFromHTML(inputHTMLBody, inputBaseURL)
-  
+      `;
+  const inputBaseURL = 'https://blog.boot.dev';
+  const actual = getURLsFromHTML(inputHTMLBody, inputBaseURL);
+
   // Notice the / at the end of the URL below:
-  const expected = ["https://blog.boot.dev/"] 
-  
-  expect(actual).toEqual(expected)
-})
+  const expected = ['https://blog.boot.dev/'];
 
-
+  expect(actual).toEqual(expected);
+});
 
 test('getURLsFromHTML relative', () => {
   const inputHTMLBody = `
@@ -61,18 +53,15 @@ test('getURLsFromHTML relative', () => {
           <a href="/path/"> Boot.dev Blog </a> 
         </body>
       </html>
-      `
-  const inputBaseURL = "https://blog.boot.dev"
-  const actual = getURLsFromHTML(inputHTMLBody, inputBaseURL)
-  
+      `;
+  const inputBaseURL = 'https://blog.boot.dev';
+  const actual = getURLsFromHTML(inputHTMLBody, inputBaseURL);
+
   // Notice the / at the end of the URL below:
-  const expected = ["https://blog.boot.dev/path/"] 
-  
-  expect(actual).toEqual(expected)
-})
+  const expected = ['https://blog.boot.dev/path/'];
 
-
-
+  expect(actual).toEqual(expected);
+});
 
 test('getURLsFromHTML both', () => {
   const inputHTMLBody = `
@@ -82,18 +71,18 @@ test('getURLsFromHTML both', () => {
           <a href="https://blog.boot.dev/path2/"> Boot.dev Blog Path 2 </a> 
         </body>
       </html>
-      `
-  const inputBaseURL = "https://blog.boot.dev"
-  const actual = getURLsFromHTML(inputHTMLBody, inputBaseURL)
-  
+      `;
+  const inputBaseURL = 'https://blog.boot.dev';
+  const actual = getURLsFromHTML(inputHTMLBody, inputBaseURL);
+
   // Notice the / at the end of the URL below:
-  const expected = ["https://blog.boot.dev/path1/", "https://blog.boot.dev/path2/"] 
-  
-  expect(actual).toEqual(expected)
-})
+  const expected = [
+    'https://blog.boot.dev/path1/',
+    'https://blog.boot.dev/path2/',
+  ];
 
-
-
+  expect(actual).toEqual(expected);
+});
 
 test('getURLsFromHTML invalid', () => {
   const inputHTMLBody = `
@@ -102,12 +91,12 @@ test('getURLsFromHTML invalid', () => {
           <a href="invalid"> invalid url </a> 
         </body>
       </html>
-      `
-  const inputBaseURL = "https://blog.boot.dev"
-  const actual = getURLsFromHTML(inputHTMLBody, inputBaseURL)
-  
+      `;
+  const inputBaseURL = 'https://blog.boot.dev';
+  const actual = getURLsFromHTML(inputHTMLBody, inputBaseURL);
+
   // Notice the / at the end of the URL below:
-  const expected = [] 
-  
-  expect(actual).toEqual(expected)
-})
+  const expected = [];
+
+  expect(actual).toEqual(expected);
+});
