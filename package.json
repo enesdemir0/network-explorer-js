@@ -1,15 +1,17 @@
 {
   "name": "network-explorer",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "main.js",
   "scripts": {
     "start": "node main.js",
-    "test": "jest"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "jest": "^30.3.0"
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "jsdom": "^22.1.0"
   }
 }
